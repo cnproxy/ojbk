@@ -3,20 +3,22 @@
 <mapper namespace="com.github.cnproxy.mapper.UserMapper">
 
     <resultMap id="UserResult" type="com.github.cnproxy.entity.User">
-        <id property="id" column="id" />
+        <result property="id" column="id" />
         <result property="qq" column="qq" />
         <result property="pass" column="pass" />
         <result property="inviteBy" column="invite_by" />
+        <result property="creationOn" column="creation_on" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+        <result property="modifiedOn" column="modified_on" javaType="java.util.Date" jdbcType="TIMESTAMP" />
     </resultMap>
 
-    <insert id="saveUser" parameterType="com.github.cnproxy.entity.User">
+    <insert id="saveUser" parameterType="com.github.cnproxy.entity.User" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO users (qq,email,pass,invite_by) VALUES (
-          #{qq},#{email},#{pass},#{inviteBy}
+          <![CDATA[#{qq}]]>,<![CDATA[#{email}]]>,<![CDATA[#{pass}]]>,<![CDATA[#{inviteBy}]]>
         )
     </insert>
 
-    <select id="findUser" resultType="com.github.cnproxy.entity.User">
-        SELECT qq,email,pass,invite_by FROM users WHERE qq = <![CDATA[#{qq}]]>
+    <select id="findUser" resultMap="com.github.cnproxy.mapper.UserMapper.UserResult">
+        SELECT id,qq,email,pass,invite_by,creation_on,modified_on FROM users WHERE qq = <![CDATA[#{qq}]]>
     </select>
 
 </mapper>

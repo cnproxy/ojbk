@@ -26,6 +26,8 @@
         <mysql-connector.version>5.1.39</mysql-connector.version>
         <junit.version>4.12</junit.version>
         <lombok.version>1.16.14</lombok.version>
+        <commons-codec.version>1.11</commons-codec.version>
+        <commons-lang3.version>3.7</commons-lang3.version>
     </properties>
 
     <dependencies>
@@ -62,6 +64,16 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>${commons-codec.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
         </dependency>
     </dependencies>
 

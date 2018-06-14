@@ -25,4 +25,4 @@ pagehelper:
 logging:
   level:
     java.sql: DEBUG
-    com.ibatis: DEBUG
+    com.github.cnproxy: DEBUG

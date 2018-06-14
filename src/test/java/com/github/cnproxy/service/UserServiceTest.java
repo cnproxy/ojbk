@@ -12,6 +12,8 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = OJBKApplication.class)
 @Transactional
@@ -24,12 +26,10 @@ public class UserServiceTest {
     @Test
     @Rollback
     public void saveUser() throws Exception {
-        User user = new User();
-        user.setQq("10001");
-        user.setPass("pony");
+        User user = new User().setQq("10001").setPass("pony").setCreationOn(new Date()).setCreationOn(new Date());
         userService.saveUser(user);
         User user2 = userService.getUser(user.getQq());
-        log.info("User {} is: ", user.getQq(), user2.toString());
-        Assert.assertEquals(user.getEmail(), user2.getEmail());
+        Assert.assertNotNull("User not null", user2);
+        Assert.assertEquals("10001@qq.com",user2.getEmail());
     }
 }

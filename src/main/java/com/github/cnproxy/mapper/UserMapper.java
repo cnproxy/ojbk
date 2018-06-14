@@ -1,5 +1,6 @@
 package com.github.cnproxy.mapper;
 
+import com.github.cnproxy.entity.BaseObject;
 import com.github.cnproxy.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 

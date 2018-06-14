@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface UserService {
 
     @Transactional(propagation = Propagation.REQUIRED)
-    void saveUser(final User user);
+    void saveUser(User user);
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     User getUser(final String qq);
