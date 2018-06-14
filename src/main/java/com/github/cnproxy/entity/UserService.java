@@ -24,6 +24,8 @@ public class UserService extends BaseObject {
     private Date beginTime;
     private Date expireTime;
 
+    private Service service;
+
     public UserService setUserId(Integer userId) {
         this.userId = userId;
         return this;
@@ -80,6 +82,11 @@ public class UserService extends BaseObject {
     @Override
     public UserService setActive(Enum active) {
         this.active = active;
+        return this;
+    }
+
+    public UserService setService(Service service) {
+        this.service = service;
         return this;
     }
 }

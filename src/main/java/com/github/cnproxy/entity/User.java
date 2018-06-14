@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author cnproxy
@@ -21,6 +22,8 @@ public class User extends BaseObject {
     @JsonIgnore
     private String pass;
     private Integer inviteBy;
+
+    private List<UserService> userServices;
 
     public User setQq(String qq) {
         this.qq = qq;
@@ -62,6 +65,11 @@ public class User extends BaseObject {
     @Override
     public Object setActive(Enum active) {
         this.active = active;
+        return this;
+    }
+
+    public User setUserServices(List<UserService> userServices) {
+        this.userServices = userServices;
         return this;
     }
 }

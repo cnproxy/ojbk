@@ -5,10 +5,21 @@
     <resultMap id="UserResult" type="com.github.cnproxy.entity.User">
         <result property="id" column="id" />
         <result property="qq" column="qq" />
-        <result property="pass" column="pass" />
         <result property="inviteBy" column="invite_by" />
         <result property="creationOn" column="creation_on" javaType="java.util.Date" jdbcType="TIMESTAMP" />
         <result property="modifiedOn" column="modified_on" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+        <collection property="userServices" ofType="com.github.cnproxy.entity.UserService">
+            <result property="vmessUUID" column="vmess_uuid" />
+            <result property="shadowsocksPort" column="shadowsocks_port" />
+            <result property="shadowsocksPass" column="shadowsocks_pass" />
+            <result property="beginTime" column="begin_time" />
+            <result property="expireTime" column="expire_time" />
+            <association property="service" javaType="com.github.cnproxy.entity.Service">
+                <result property="serviceName" column="service_name" />
+                <result property="serviceType" column="service_type" />
+                <result property="price" column="price" />
+            </association>
+        </collection>
     </resultMap>
 
     <insert id="saveUser" parameterType="com.github.cnproxy.entity.User" useGeneratedKeys="true" keyProperty="id">
@@ -18,7 +29,14 @@
     </insert>
 
     <select id="findUser" resultMap="com.github.cnproxy.mapper.UserMapper.UserResult">
-        SELECT id,qq,email,pass,invite_by,creation_on,modified_on FROM users WHERE qq = <![CDATA[#{qq}]]>
+        SELECT
+	      u.id,u.qq,u.invite_by,
+	      us.vmess_uuid,us.shadowsocks_port,us.shadowsocks_pass,us.begin_time,us.expire_time,us.expired,
+	      s.service_name,s.service_type,s.price
+        FROM user_service us
+	      INNER JOIN users u ON us.user_id = u.id AND u.active = 'Y'
+	      INNER JOIN services s ON us.service_id = s.id AND s.active = 'Y'
+        WHERE u.qq = <![CDATA[#{qq}]]>
     </select>
 
 </mapper>
