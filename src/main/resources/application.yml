@@ -22,3 +22,7 @@ pagehelper:
   row-bounds-with-count: true
   auto-dialect: true
   reasonable: false
+logging:
+  level:
+    java.sql: DEBUG
+    com.ibatis: DEBUG

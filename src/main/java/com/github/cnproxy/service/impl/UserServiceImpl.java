@@ -14,7 +14,12 @@ public class UserServiceImpl implements UserService {
     @Autowired UserMapper userMapper;
 
     @Override
-    public void saveUser(User user) {
+    public void saveUser(final User user) {
         userMapper.saveUser(user);
+    }
+
+    @Override
+    public User getUser(final String qq) {
+        return userMapper.findUser(qq);
     }
 }
