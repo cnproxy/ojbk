@@ -2,6 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.github.cnproxy.mapper.UserMapper">
 
-
+    <insert id="saveUser" parameterType="com.github.cnproxy.entity.User">
+        INSERT INTO users (qq,email,pass,invite_by) VALUES (
+          #{qq},#{email},#{pass},#{inviteBy}
+        )
+    </insert>
 
 </mapper>
