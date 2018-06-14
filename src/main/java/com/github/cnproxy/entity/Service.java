@@ -9,7 +9,7 @@ import lombok.ToString;
  * @author cnproxy
  */
 @Getter @Setter @ToString(callSuper = true)
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 public class Service extends BaseObject {
 
     private static final long serialVersionUID = 5773555931257027059L;
