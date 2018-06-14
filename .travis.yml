@@ -1,0 +1,22 @@
+sudo: required
+language: java
+jdk:
+  - oraclejdk8
+
+services:
+  - docker
+
+before_install:
+  - mvn clean package -DskipTests
+  - docker build -t cnproxy/ojbk:1.0 .
+  - docker build -t cnproxy/ojbk .
+
+script:
+  - docker images
+
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+      docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+      docker push cnproxy/shadowsocks-kcptun:1.0;
+      docker push cnproxy/shadowsocks-kcptun;
+    fi

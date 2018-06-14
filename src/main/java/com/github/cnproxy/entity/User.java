@@ -1,5 +1,6 @@
 package com.github.cnproxy.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +18,7 @@ public class User extends BaseObject {
     private static final long serialVersionUID = 6194284054791236795L;
 
     private String qq;
+    @JsonIgnore
     private String pass;
     private Integer inviteBy;
 
