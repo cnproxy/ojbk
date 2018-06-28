@@ -1,5 +1,6 @@
 package com.github.cnproxy.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +14,7 @@ import java.util.Date;
  */
 @Getter @Setter @ToString()
 @EqualsAndHashCode()
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ExpiredRankingDTO implements java.io.Serializable {
 
     private String vmessUUID;

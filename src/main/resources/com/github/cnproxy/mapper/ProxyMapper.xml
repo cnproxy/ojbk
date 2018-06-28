@@ -47,8 +47,8 @@
     <select id="expiredRanking" resultType="com.github.cnproxy.dto.ExpiredRankingDTO">
         SELECT
 	      u.qq,
-	      us.vmess_uuid,us.shadowsocks_port,us.shadowsocks_pass,us.begin_time,us.expire_time,us.expired,
-	      s.service_name,s.service_type,s.price
+	      us.vmess_uuid vmessUUID,us.shadowsocks_port shadowsocksPort,us.shadowsocks_pass shadowsocksPass,us.begin_time beginTime,us.expire_time expireTime,
+	      s.service_name serviceName,s.service_type serviceType,s.price
         FROM user_service us
 	      INNER JOIN users u ON us.user_id = u.id AND u.active = 'Y'
 	      INNER JOIN services s ON us.service_id = s.id AND s.active = 'Y'
