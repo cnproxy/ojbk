@@ -39,4 +39,8 @@
         WHERE u.qq = <![CDATA[#{qq}]]>
     </select>
 
+    <select id="login" resultType="com.github.cnproxy.entity.User">
+        SELECT * FROM users u WHERE u.qq = <![CDATA[#{qq}]]>
+    </select>
+
 </mapper>

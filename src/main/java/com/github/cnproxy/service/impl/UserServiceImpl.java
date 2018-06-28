@@ -28,4 +28,18 @@ public class UserServiceImpl implements UserService {
     public User getUser(final String qq) {
         return userMapper.findUser(qq);
     }
+
+    @Override
+    public User login(String qq, String pass) {
+        User user = userMapper.login(qq);
+        if(null == user) {
+            log.error("User doesn't exists");
+            throw new RuntimeException("User doesn't exists");
+        }
+        if(!DigestUtils.md5Hex(pass).equals(user.getPass())){
+            log.error("Password error");
+            throw new RuntimeException("Password error");
+        }
+        return user;
+    }
 }

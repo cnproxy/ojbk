@@ -12,4 +12,7 @@ public interface UserService {
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     User getUser(final String qq);
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    User login(final String qq,final String pass);
 }

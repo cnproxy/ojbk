@@ -20,7 +20,7 @@ public class UserService extends BaseObject {
     private Integer serviceId;
     private String vmessUUID;
     private Integer shadowsocksPort;
-    private Integer shadowsocksPass;
+    private String shadowsocksPass;
     private Date beginTime;
     private Date expireTime;
 
@@ -46,7 +46,7 @@ public class UserService extends BaseObject {
         return this;
     }
 
-    public UserService setShadowsocksPass(Integer shadowsocksPass) {
+    public UserService setShadowsocksPass(String shadowsocksPass) {
         this.shadowsocksPass = shadowsocksPass;
         return this;
     }

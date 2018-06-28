@@ -10,4 +10,6 @@ public interface UserMapper {
     void saveUser(final User user);
 
     User findUser(final String qq);
+
+    User login(final String qq);
 }
