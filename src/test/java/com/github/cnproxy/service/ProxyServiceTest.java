@@ -18,17 +18,17 @@ import java.util.Date;
 @SpringBootTest(classes = OJBKApplication.class)
 @Transactional
 @Slf4j
-public class UserServiceTest {
+public class ProxyServiceTest {
 
     @Autowired
-    private UserService userService;
+    private ProxyService proxyService;
 
     @Test
     @Rollback
     public void saveUser() throws Exception {
         User user = new User().setQq("10001").setPass("pony").setCreationOn(new Date()).setCreationOn(new Date());
-        userService.saveUser(user);
-        User user2 = userService.getUser(user.getQq());
+        proxyService.saveUser(user);
+        User user2 = proxyService.getUser(user.getQq());
         Assert.assertNotNull("User not null", user2);
         Assert.assertEquals("10001@qq.com",user2.getEmail());
     }

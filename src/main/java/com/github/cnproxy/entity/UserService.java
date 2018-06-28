@@ -24,6 +24,7 @@ public class UserService extends BaseObject {
     private Date beginTime;
     private Date expireTime;
 
+    private User user;
     private Service service;
 
     public UserService setUserId(Integer userId) {
@@ -85,8 +86,14 @@ public class UserService extends BaseObject {
         return this;
     }
 
+    public UserService setUser(User user) {
+        this.user = user;
+        return this;
+    }
+
     public UserService setService(Service service) {
         this.service = service;
         return this;
     }
+
 }

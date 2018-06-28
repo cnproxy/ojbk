@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.github.cnproxy.mapper.UserMapper">
+<mapper namespace="com.github.cnproxy.mapper.ProxyMapper">
 
     <resultMap id="UserResult" type="com.github.cnproxy.entity.User">
         <result property="id" column="id" />
@@ -28,7 +28,7 @@
         )
     </insert>
 
-    <select id="findUser" resultMap="com.github.cnproxy.mapper.UserMapper.UserResult">
+    <select id="findUser" resultMap="com.github.cnproxy.mapper.ProxyMapper.UserResult">
         SELECT
 	      u.id,u.qq,u.invite_by,
 	      us.vmess_uuid,us.shadowsocks_port,us.shadowsocks_pass,us.begin_time,us.expire_time,us.expired,
@@ -41,6 +41,18 @@
 
     <select id="login" resultType="com.github.cnproxy.entity.User">
         SELECT * FROM users u WHERE u.qq = <![CDATA[#{qq}]]>
+    </select>
+
+
+    <select id="expiredRanking" resultType="com.github.cnproxy.dto.ExpiredRankingDTO">
+        SELECT
+	      u.qq,
+	      us.vmess_uuid,us.shadowsocks_port,us.shadowsocks_pass,us.begin_time,us.expire_time,us.expired,
+	      s.service_name,s.service_type,s.price
+        FROM user_service us
+	      INNER JOIN users u ON us.user_id = u.id AND u.active = 'Y'
+	      INNER JOIN services s ON us.service_id = s.id AND s.active = 'Y'
+        ORDER BY us.expire_time ASC
     </select>
 
 </mapper>
