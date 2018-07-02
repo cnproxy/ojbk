@@ -32,7 +32,7 @@
     <select id="findUser" resultMap="com.github.cnproxy.mapper.ProxyMapper.UserResult">
         SELECT
 	      u.id,u.qq,u.invite_by,
-	      us.vmess_uuid,us.shadowsocks_port,us.shadowsocks_pass,us.begin_time,us.expire_time,us.expired,us.descript
+	      us.vmess_uuid,us.shadowsocks_port,us.shadowsocks_pass,us.begin_time,us.expire_time,us.expired,us.descript,
 	      s.service_name,s.service_type,s.price
         FROM user_service us
 	      INNER JOIN users u ON us.user_id = u.id AND u.active = 'Y'
@@ -48,7 +48,7 @@
     <select id="expiredRanking" resultType="com.github.cnproxy.dto.ExpiredRankingDTO">
         SELECT
 	      u.qq,
-	      us.vmess_uuid vmessUUID,us.shadowsocks_port shadowsocksPort,us.shadowsocks_pass shadowsocksPass,us.begin_time beginTime,us.expire_time expireTime,us.descript
+	      us.vmess_uuid vmessUUID,us.shadowsocks_port shadowsocksPort,us.shadowsocks_pass shadowsocksPass,us.begin_time beginTime,us.expire_time expireTime,us.descript,
 	      s.service_name serviceName,s.service_type serviceType,s.price
         FROM user_service us
 	      INNER JOIN users u ON us.user_id = u.id AND u.active = 'Y'
