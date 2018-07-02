@@ -26,6 +26,7 @@ public class UserService extends BaseObject {
 
     private User user;
     private Service service;
+    private String descript;
 
     public UserService setUserId(Integer userId) {
         this.userId = userId;
@@ -96,4 +97,8 @@ public class UserService extends BaseObject {
         return this;
     }
 
+    public UserService setDescript(String descript) {
+        this.descript = descript;
+        return this;
+    }
 }

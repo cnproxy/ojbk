@@ -28,6 +28,7 @@ CREATE TABLE user_service (
   begin_time date NOT NULL,
   expire_time date NOT NULL,
   expired enum('N','Y') NOT NULL DEFAULT 'N',
+  descript varchar(20),
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='User & Service';
 
