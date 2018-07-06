@@ -6,6 +6,8 @@ import com.github.cnproxy.service.ProxyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,11 +22,13 @@ public class ApiController {
     @Autowired private ProxyService proxyService;
 
     @GetMapping("/user")
+    @PostAuthorize("returnObject.qq == principal.username")
     public ResponseEntity<User> getUser(@RequestParam("qq") final String qq) {
         return new ResponseEntity<User>(proxyService.getUser(qq),HttpStatus.OK);
     }
 
     @GetMapping("/expired/ranking")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<ExpiredRankingDTO>> getExpiredRanking() {
         return new ResponseEntity<List<ExpiredRankingDTO>>(proxyService.getExpiredRanking(),HttpStatus.OK);
     }

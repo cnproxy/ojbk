@@ -22,6 +22,11 @@ pagehelper:
   row-bounds-with-count: true
   auto-dialect: true
   reasonable: false
+jwt:
+  header: "Authorization"
+  secret: "mySecret"
+  expiration: 604800
+  tokenHead: "Bearer "
 logging:
   level:
     java.sql: DEBUG

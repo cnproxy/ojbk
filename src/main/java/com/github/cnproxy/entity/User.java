@@ -1,10 +1,7 @@
 package com.github.cnproxy.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.Date;
 import java.util.List;
@@ -18,15 +15,16 @@ public class User extends BaseObject {
 
     private static final long serialVersionUID = 6194284054791236795L;
 
-    private String qq;
+    private String username;
     @JsonIgnore
     private String pass;
     private Integer inviteBy;
 
     private List<UserService> userServices;
+    private List<String> roles;
 
-    public User setQq(String qq) {
-        this.qq = qq;
+    public User setUsername(String username) {
+        this.username = username;
         return this;
     }
 
@@ -41,7 +39,7 @@ public class User extends BaseObject {
     }
 
     public String getEmail() {
-        return this.getQq().concat("@qq.com");
+        return this.getUsername().concat("@qq.com");
     }
 
     @Override
@@ -70,6 +68,11 @@ public class User extends BaseObject {
 
     public User setUserServices(List<UserService> userServices) {
         this.userServices = userServices;
+        return this;
+    }
+
+    public User setRoles(List<String> roles) {
+        this.roles = roles;
         return this;
     }
 }

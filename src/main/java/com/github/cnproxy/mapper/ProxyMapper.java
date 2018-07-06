@@ -1,7 +1,6 @@
 package com.github.cnproxy.mapper;
 
 import com.github.cnproxy.dto.ExpiredRankingDTO;
-import com.github.cnproxy.entity.BaseObject;
 import com.github.cnproxy.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -14,7 +13,9 @@ public interface ProxyMapper {
 
     User findUser(final String qq);
 
-    User login(final String qq);
+    User findUserByQQ(final String qq);
 
     List<ExpiredRankingDTO> expiredRanking();
+
+    void grantUserRole(final Integer userId);
 }

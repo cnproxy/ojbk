@@ -4,7 +4,7 @@
 
     <resultMap id="UserResult" type="com.github.cnproxy.entity.User">
         <result property="id" column="id" />
-        <result property="qq" column="qq" />
+        <result property="username" column="qq" />
         <result property="inviteBy" column="invite_by" />
         <result property="creationOn" column="creation_on" javaType="java.util.Date" jdbcType="TIMESTAMP" />
         <result property="modifiedOn" column="modified_on" javaType="java.util.Date" jdbcType="TIMESTAMP" />
@@ -23,11 +23,35 @@
         </collection>
     </resultMap>
 
+    <resultMap id="UserWithRoleNameResult" type="com.github.cnproxy.entity.User">
+        <result property="id" column="id" />
+        <result property="username" column="qq" />
+        <result property="inviteBy" column="invite_by" />
+        <result property="creationOn" column="creation_on" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+        <result property="modifiedOn" column="modified_on" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+        <collection property="roles" ofType="java.lang.String">
+            <result property="roleName" column="roleName" />
+        </collection>
+    </resultMap>
+
     <insert id="saveUser" parameterType="com.github.cnproxy.entity.User" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO users (qq,email,pass,invite_by) VALUES (
           <![CDATA[#{qq}]]>,<![CDATA[#{email}]]>,<![CDATA[#{pass}]]>,<![CDATA[#{inviteBy}]]>
         )
     </insert>
+
+    <insert id="grantUserRole">
+        INSERT INTO user_role (user_id,role_id) VALUES (<![CDATA[#{userId}]]>,2)
+    </insert>
+
+    <select id="findUserByQQ" resultMap="com.github.cnproxy.mapper.ProxyMapper.UserWithRoleNameResult">
+          SELECT
+            u.*, r.`name` AS roleName
+          FROM users u
+            INNER JOIN user_role ur on u.id = ur.user_id
+            INNER JOIN roles r on ur.role_id = r.id
+          WHERE u.qq = <![CDATA[#{qq}]]>
+    </select>
 
     <select id="findUser" resultMap="com.github.cnproxy.mapper.ProxyMapper.UserResult">
         SELECT
@@ -39,11 +63,6 @@
 	      INNER JOIN services s ON us.service_id = s.id AND s.active = 'Y'
         WHERE u.qq = <![CDATA[#{qq}]]>
     </select>
-
-    <select id="login" resultType="com.github.cnproxy.entity.User">
-        SELECT * FROM users u WHERE u.qq = <![CDATA[#{qq}]]>
-    </select>
-
 
     <select id="expiredRanking" resultType="com.github.cnproxy.dto.ExpiredRankingDTO">
         SELECT

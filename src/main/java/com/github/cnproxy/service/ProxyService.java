@@ -11,13 +11,13 @@ import java.util.List;
 public interface ProxyService {
 
     @Transactional(propagation = Propagation.REQUIRED)
-    void saveUser(User user);
+    void register(final User user);
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     User getUser(final String qq);
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    User login(final String qq,final String pass);
+    User findUser(final String qq);
 
     /**
      * 过期排行榜

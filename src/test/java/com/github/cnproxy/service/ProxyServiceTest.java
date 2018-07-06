@@ -26,9 +26,9 @@ public class ProxyServiceTest {
     @Test
     @Rollback
     public void saveUser() throws Exception {
-        User user = new User().setQq("10001").setPass("pony").setCreationOn(new Date()).setCreationOn(new Date());
-        proxyService.saveUser(user);
-        User user2 = proxyService.getUser(user.getQq());
+        User user = new User().setUsername("10001").setPass("pony").setCreationOn(new Date()).setCreationOn(new Date());
+        proxyService.register(user);
+        User user2 = proxyService.getUser(user.getUsername());
         Assert.assertNotNull("User not null", user2);
         Assert.assertEquals("10001@qq.com",user2.getEmail());
     }
