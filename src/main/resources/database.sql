@@ -38,7 +38,7 @@ CREATE TABLE users (
   id bigint(11) NOT NULL AUTO_INCREMENT,
   qq varchar(20) NOT NULL,
   email varchar(20) NOT NULL,
-  pass varchar(32) NOT NULL,
+  password varchar(32) NOT NULL,
   active enum('N','Y') NOT NULL DEFAULT 'Y',
   creation_on timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   modified_on timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

@@ -24,10 +24,11 @@ public class JwtTokenUtil implements Serializable {
 
     private static final long serialVersionUID = -3301605591108950415L;
 
-    private static final String CLAIM_KEY_USERID = "userId";
-    private static final String CLAIM_KEY_ROLES = "roles";
-    private static final String CLAIM_KEY_USERNAME = "sub";
-    private static final String CLAIM_KEY_CREATED = "created";
+    private static final String CLAIM_KEY_USERID = "https://ojbk.com/claim/userId";
+    private static final String CLAIM_KEY_ROLES = "https://ojbk.com/claim/roles";
+    private static final String CLAIM_KEY_USERNAME = "https://ojbk.com/claim/sub";
+    private static final String CLAIM_KEY_CREATED = "https://ojbk.com/claim/created";
+    private static final String CLAIM_KEY_ENABLED = "https://ojbk.com/claim/enabled";
 
 
     @Value("${jwt.secret}")
@@ -36,17 +37,19 @@ public class JwtTokenUtil implements Serializable {
     @Value("${jwt.expiration}")
     private Long expiration;
 
-    public UserDetails convertJWTTokenToUserDetails (final String token) {
-        final Claims claims =  Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+    public UserDetails convertJWTTokenToUserDetails(final String token) {
+        final Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
         final Integer id = claims.get(CLAIM_KEY_USERID, Integer.class);
-        final String username = claims.getSubject();
-        final List<String> roles = claims.get(CLAIM_KEY_CREATED, List.class);
-        List<GrantedAuthority> authorities = roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+        final String username = claims.get(CLAIM_KEY_USERNAME,String.class);
+        final List<String> roles = claims.get(CLAIM_KEY_ROLES, List.class);
+        final boolean enabled = claims.get(CLAIM_KEY_ENABLED,Boolean.class);
         final Date expiration = claims.getExpiration();
         if (expiration.before(new Date())) {
             log.warn("The token already expired");
         }
-        return JwtUserFactory.create(id,username, StringUtils.EMPTY, authorities, true);
+        return JwtUserFactory.create(id, username, StringUtils.EMPTY,
+                roles.stream().map(role -> new SimpleGrantedAuthority(role)).collect(Collectors.toList()),
+                enabled);
     }
 
     public String getUsernameFromToken(String token) {
@@ -112,8 +115,9 @@ public class JwtTokenUtil implements Serializable {
         Map<String, Object> claims = new HashMap<>();
         claims.put(CLAIM_KEY_USERID, userDetails.getId());
         claims.put(CLAIM_KEY_USERNAME, userDetails.getUsername());
-        claims.put(CLAIM_KEY_ROLES, userDetails.getAuthorities());
+        claims.put(CLAIM_KEY_ROLES, userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()));
         claims.put(CLAIM_KEY_CREATED, new Date());
+        claims.put(CLAIM_KEY_ENABLED, userDetails.isEnabled());
         return generateToken(claims);
     }
 

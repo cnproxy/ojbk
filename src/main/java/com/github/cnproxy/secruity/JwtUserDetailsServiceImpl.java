@@ -1,8 +1,7 @@
 package com.github.cnproxy.secruity;
 
 import com.github.cnproxy.entity.User;
-import com.github.cnproxy.entity.UserService;
-import com.github.cnproxy.service.ProxyService;
+import com.github.cnproxy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,11 +11,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class JwtUserDetailsServiceImpl implements UserDetailsService {
     @Autowired
-    private ProxyService proxyService;
+    private UserService userService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = proxyService.findUser(username);
+        User user = userService.findUserByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));
         } else {
