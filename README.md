@@ -1,4 +1,4 @@
-# 接口说明
+# 接口说明 [![Build Status](https://travis-ci.org/cnproxy/ojbk.svg?branch=master)](https://travis-ci.org/cnproxy/ojbk)
 
 * 获取token  
   POST https://sw.tomaer.com/api/token/access  
