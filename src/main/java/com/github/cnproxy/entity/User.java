@@ -7,7 +7,6 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.validator.constraints.NotBlank;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +16,7 @@ import java.util.List;
 @Getter @Setter @ToString
 @EqualsAndHashCode
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class User implements Serializable {
+public class User implements java.io.Serializable {
 
     private static final long serialVersionUID = 6194284054791236795L;
 

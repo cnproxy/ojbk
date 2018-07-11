@@ -5,11 +5,13 @@
     <select id="expiredRanking" resultType="com.github.cnproxy.dto.ExpiredRankingDTO">
         SELECT
 	      u.username,
-	      us.vmess_uuid vmessUUID,us.shadowsocks_port shadowsocksPort,us.shadowsocks_pass shadowsocksPass,us.begin_time beginTime,us.expire_time expireTime,us.descript,
+	      us.vmess_uuid vmessUUID,us.shadowsocks_port shadowsocksPort,us.shadowsocks_pass shadowsocksPass,us.begin_time beginTime,us.expire_time expireTime, us.expired expired, us.descript,
 	      s.service_name serviceName,s.service_type serviceType,s.price
         FROM user_service us
 	      INNER JOIN users u ON us.user_id = u.id AND u.enabled = 1
-	      INNER JOIN services s ON us.service_id = s.id AND s.active = 'Y'
+	      INNER JOIN services s ON us.service_id = s.id
+	    WHERE
+	      us.expired = 0
         ORDER BY us.expire_time ASC
     </select>
 

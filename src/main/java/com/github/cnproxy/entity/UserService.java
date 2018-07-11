@@ -10,12 +10,13 @@ import java.util.Date;
 /**
  * @author cnproxy
  */
-@Getter @Setter @ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
-public class UserService extends BaseObject {
+@Getter @Setter @ToString
+@EqualsAndHashCode
+public class UserService implements java.io.Serializable {
 
     private static final long serialVersionUID = -1428136747947282550L;
 
+    private Integer id;
     private Integer userId;
     private Integer serviceId;
     private String vmessUUID;
@@ -23,10 +24,16 @@ public class UserService extends BaseObject {
     private String shadowsocksPass;
     private Date beginTime;
     private Date expireTime;
+    private boolean expired;
 
     private User user;
     private Service service;
     private String descript;
+
+    public UserService setId(Integer id) {
+        this.id = id;
+        return this;
+    }
 
     public UserService setUserId(Integer userId) {
         this.userId = userId;
@@ -63,27 +70,8 @@ public class UserService extends BaseObject {
         return this;
     }
 
-    @Override
-    public UserService setId(Integer id) {
-        this.id = id;
-        return this;
-    }
-
-    @Override
-    public UserService setCreationOn(Date creationOn) {
-        this.creationOn = creationOn;
-        return this;
-    }
-
-    @Override
-    public UserService setModifiedOn(Date modifiedOn) {
-        this.modifiedOn = modifiedOn;
-        return this;
-    }
-
-    @Override
-    public UserService setActive(Enum active) {
-        this.active = active;
+    public UserService setExpired(boolean expired) {
+        this.expired = expired;
         return this;
     }
 

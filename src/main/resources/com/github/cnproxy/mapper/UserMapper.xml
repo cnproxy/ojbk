@@ -17,6 +17,7 @@
             <result property="beginTime" column="begin_time" />
             <result property="expireTime" column="expire_time" />
             <result property="descript" column="descript" />
+            <result property="expired" column="expired" />
             <association property="service" javaType="com.github.cnproxy.entity.Service">
                 <result property="serviceName" column="service_name" />
                 <result property="serviceType" column="service_type" />
@@ -45,7 +46,7 @@
 	      s.service_name,s.service_type,s.price
         FROM user_service us
 	      INNER JOIN users u ON us.user_id = u.id AND u.enabled = 1
-	      INNER JOIN services s ON us.service_id = s.id AND s.active = 'Y'
+	      INNER JOIN services s ON us.service_id = s.id
         WHERE u.username = <![CDATA[#{username}]]>
     </select>
 

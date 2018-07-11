@@ -10,15 +10,20 @@ import java.util.Date;
 /**
  * @author cnproxy
  */
-@Getter @Setter @ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
-public class Service extends BaseObject {
+@Getter @Setter @ToString
+@EqualsAndHashCode
+public class Service implements java.io.Serializable {
 
     private static final long serialVersionUID = 5773555931257027059L;
-
+    private Integer id;
     private String serviceName;
     private String serviceType;
     private Integer price;
+
+    public Service setId(Integer id) {
+        this.id = id;
+        return this;
+    }
 
     public Service setServiceName(String serviceName) {
         this.serviceName = serviceName;
@@ -32,30 +37,6 @@ public class Service extends BaseObject {
 
     public Service setPrice(Integer price) {
         this.price = price;
-        return this;
-    }
-
-    @Override
-    public Service setId(Integer id) {
-        this.id = id;
-        return this;
-    }
-
-    @Override
-    public Service setCreationOn(Date creationOn) {
-        this.creationOn = creationOn;
-        return this;
-    }
-
-    @Override
-    public Service setModifiedOn(Date modifiedOn) {
-        this.modifiedOn = modifiedOn;
-        return this;
-    }
-
-    @Override
-    public Service setActive(Enum active) {
-        this.active = active;
         return this;
     }
 }
