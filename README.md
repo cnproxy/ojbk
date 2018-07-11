@@ -5,7 +5,12 @@
   请求参数 `{"username":"","password":""}`  
   返回 `{"token": ""}`  
 
-* 我的个人信息  
+* 获取用户身份  
+  GET https://sw.tomaer.com/api/sec/user/identity  
+  Headers: Authorization {{token}} `token`为`AccessToken`返回的的结果  
+  返回 `{"identity": ["ROLE_ADMIN","ROLE_USER"]}`  
+  
+* 获取个人信息  
   GET https://sw.tomaer.com/api/sec/user  
   Headers: Authorization {{token}} `token`为`AccessToken`返回的的结果
 
