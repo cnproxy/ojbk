@@ -1,5 +1,6 @@
 package com.github.cnproxy.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,6 +11,7 @@ import lombok.ToString;
  */
 @Getter @Setter @ToString
 @EqualsAndHashCode
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Item implements java.io.Serializable {
 
     private static final long serialVersionUID = 5773555931257027059L;
