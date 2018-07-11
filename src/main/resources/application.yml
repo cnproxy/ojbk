@@ -23,8 +23,8 @@ pagehelper:
   auto-dialect: true
   reasonable: false
 jwt:
-  header: "Authorization"
-  secret: "mySecret"
+  header: Authorization
+  secret: ${MYSECRET:mySecret}
   expiration: 604800
   tokenHead: "Bearer "
 logging:
