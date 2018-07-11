@@ -10,8 +10,6 @@
         FROM user_service us
 	      INNER JOIN users u ON us.user_id = u.id AND u.enabled = 1
 	      INNER JOIN services s ON us.service_id = s.id
-	    WHERE
-	      us.expired = 0
         ORDER BY us.expire_time ASC
     </select>
 

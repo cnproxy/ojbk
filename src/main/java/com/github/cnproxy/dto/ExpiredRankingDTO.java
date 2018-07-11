@@ -22,6 +22,7 @@ public class ExpiredRankingDTO implements java.io.Serializable {
     private String shadowsocksPass;
     private Date beginTime;
     private Date expireTime;
+    private boolean expired;
     private String descript;
     private String username;
 
