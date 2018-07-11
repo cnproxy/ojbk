@@ -12,7 +12,7 @@ import java.util.Date;
  */
 @Getter @Setter @ToString
 @EqualsAndHashCode
-public class UserService implements java.io.Serializable {
+public class MyService implements java.io.Serializable {
 
     private static final long serialVersionUID = -1428136747947282550L;
 
@@ -27,65 +27,65 @@ public class UserService implements java.io.Serializable {
     private boolean expired;
 
     private User user;
-    private Service service;
+    private Item item;
     private String descript;
 
-    public UserService setId(Integer id) {
+    public MyService setId(Integer id) {
         this.id = id;
         return this;
     }
 
-    public UserService setUserId(Integer userId) {
+    public MyService setUserId(Integer userId) {
         this.userId = userId;
         return this;
     }
 
-    public UserService setServiceId(Integer serviceId) {
+    public MyService setServiceId(Integer serviceId) {
         this.serviceId = serviceId;
         return this;
     }
 
-    public UserService setVmessUUID(String vmessUUID) {
+    public MyService setVmessUUID(String vmessUUID) {
         this.vmessUUID = vmessUUID;
         return this;
     }
 
-    public UserService setShadowsocksPort(Integer shadowsocksPort) {
+    public MyService setShadowsocksPort(Integer shadowsocksPort) {
         this.shadowsocksPort = shadowsocksPort;
         return this;
     }
 
-    public UserService setShadowsocksPass(String shadowsocksPass) {
+    public MyService setShadowsocksPass(String shadowsocksPass) {
         this.shadowsocksPass = shadowsocksPass;
         return this;
     }
 
-    public UserService setBeginTime(Date beginTime) {
+    public MyService setBeginTime(Date beginTime) {
         this.beginTime = beginTime;
         return this;
     }
 
-    public UserService setExpireTime(Date expireTime) {
+    public MyService setExpireTime(Date expireTime) {
         this.expireTime = expireTime;
         return this;
     }
 
-    public UserService setExpired(boolean expired) {
+    public MyService setExpired(boolean expired) {
         this.expired = expired;
         return this;
     }
 
-    public UserService setUser(User user) {
+    public MyService setUser(User user) {
         this.user = user;
         return this;
     }
 
-    public UserService setService(Service service) {
-        this.service = service;
+    public MyService setItem(Item item) {
+        this.item = item;
         return this;
     }
 
-    public UserService setDescript(String descript) {
+    public MyService setDescript(String descript) {
         this.descript = descript;
         return this;
     }

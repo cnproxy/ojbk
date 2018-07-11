@@ -10,7 +10,7 @@
         <result property="inviteBy" column="invite_by" />
         <result property="creationOn" column="creation_on" javaType="java.util.Date" jdbcType="TIMESTAMP" />
         <result property="modifiedOn" column="modified_on" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-        <collection property="userServices" ofType="com.github.cnproxy.entity.UserService">
+        <collection property="services" ofType="com.github.cnproxy.entity.MyService">
             <result property="vmessUUID" column="vmess_uuid" />
             <result property="shadowsocksPort" column="shadowsocks_port" />
             <result property="shadowsocksPass" column="shadowsocks_pass" />
@@ -18,7 +18,7 @@
             <result property="expireTime" column="expire_time" />
             <result property="descript" column="descript" />
             <result property="expired" column="expired" />
-            <association property="service" javaType="com.github.cnproxy.entity.Service">
+            <association property="item" javaType="com.github.cnproxy.entity.Item">
                 <result property="serviceName" column="service_name" />
                 <result property="serviceType" column="service_type" />
                 <result property="price" column="price" />

@@ -28,7 +28,7 @@ public class User implements java.io.Serializable {
     private Date modifiedOn;
     private Integer inviteBy;
 
-    private List<UserService> userServices;
+    private List<MyService> services;
     private List<String> roles;
 
     public User setId(Integer id) {
@@ -66,8 +66,8 @@ public class User implements java.io.Serializable {
         return this;
     }
 
-    public User setUserServices(List<UserService> userServices) {
-        this.userServices = userServices;
+    public User setServices(List<MyService> services) {
+        this.services = services;
         return this;
     }
 
