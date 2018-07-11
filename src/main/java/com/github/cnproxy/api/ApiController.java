@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.springframework.security.core.context.SecurityContextHolder.getContext;
 
@@ -47,9 +49,12 @@ public class ApiController {
 
     @GetMapping("/user/identity")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<List<SimpleGrantedAuthority>> getIdentity() {
+    public ResponseEntity<Map<String,List<String>>> getIdentity() {
         List<SimpleGrantedAuthority> authorities = (List<SimpleGrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
-        return new ResponseEntity<>(authorities,HttpStatus.OK);
+        final List<String> roles = authorities.stream().map(SimpleGrantedAuthority::getAuthority).collect(Collectors.toList());
+        Map<String,List<String>> result = new HashMap<>();
+        result.put("identity",roles);
+        return new ResponseEntity<>(result,HttpStatus.OK);
     }
 
 }
