@@ -1,5 +1,6 @@
 package com.github.cnproxy.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -22,7 +23,7 @@ public class User implements java.io.Serializable {
 
     private Integer id;
     @NotBlank private String username;
-    @NotBlank private String password;
+    @NotBlank @JsonIgnore private String password;
     private boolean enabled = true;
     private Date creationOn;
     private Date modifiedOn;
