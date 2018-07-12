@@ -28,4 +28,11 @@ public class InvitationCode implements java.io.Serializable {
         this.setCode(UUID.randomUUID().toString());
         this.toUser = toUser;
     }
+
+    public InvitationCode(Integer id, String code, Integer toUser, boolean used) {
+        this.id = id;
+        this.code = code;
+        this.toUser = toUser;
+        this.used = used;
+    }
 }
