@@ -1,6 +1,6 @@
 # 接口说明 [![Build Status](https://travis-ci.org/cnproxy/ojbk.svg?branch=master)](https://travis-ci.org/cnproxy/ojbk)
 
-* 用户注册
+* 用户注册  
   POST https://sw.tomaer.com/api/user/register  
   Body: `{"username":"" ,"password":"" ,"invitationCode":""}`  
   Return: 200  
