@@ -67,3 +67,12 @@ CREATE TABLE users (
   invite_by bigint(11) DEFAULT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 STATS_PERSISTENT=0 COMMENT='User info';
+
+
+DROP TABLE IF EXISTS invitation_codes;
+CREATE TABLE invitation_codes (
+  id bigint(11) NOT NULL AUTO_INCREMENT,
+  code varchar(64) DEFAULT NULL,
+  user_id bigint(11) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 STATS_PERSISTENT=0 COMMENT='Invitation Code Info';
