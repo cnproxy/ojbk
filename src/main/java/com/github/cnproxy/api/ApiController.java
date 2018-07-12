@@ -41,7 +41,7 @@ public class ApiController {
         return new ResponseEntity<>(proxyService.getExpiredRanking(),HttpStatus.OK);
     }
 
-    @PostMapping("/invitationcode/assign")
+    @PostMapping("/invitationcodes")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<InvitationCode> assignInvitationCode(@RequestBody InvitationCodePTO pto) {
         return new ResponseEntity<>(invitationCodeService.assignInvitationCode(pto.getUserId()),HttpStatus.OK);

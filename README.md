@@ -29,12 +29,12 @@
   Headers: Authorization {{token}} `token`为`AccessToken`返回的的结果  
 
 * 管理员给用户发放邀请码  
-  POST https://sw.tomaer.com/api/sec/invitationcode/assign  
+  POST https://sw.tomaer.com/api/sec/invitationcodes   
   Headers: Authorization {{token}} `token`为`AccessToken`返回的的结果  
   Body: `{"userId": 1}`  
   Return: `{"id": 1 ,"code": "21b8522a-9832-4713-b5b6-8d9e740c8d8f" ,"used": false}`
   
 * 管理员获取所有邀请码  
-  GET https://sw.tomaer.com/api/sec/invitationcodes      
+  GET https://sw.tomaer.com/api/sec/invitationcodes  
   Headers: Authorization {{token}} `token`为`AccessToken`返回的的结果  
   Return: `[{"id": 1 ,"code": "21b8522a-9832-4713-b5b6-8d9e740c8d8f" ,"used": false}]`  
