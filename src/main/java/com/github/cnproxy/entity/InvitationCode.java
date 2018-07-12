@@ -1,6 +1,5 @@
 package com.github.cnproxy.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +17,6 @@ public class InvitationCode implements java.io.Serializable {
     /** 邀请码 */
     private String code;
     /** 分配给用户 */
-    @JsonIgnore
     private Integer toUser;
 
     /** 是否被使用 */
