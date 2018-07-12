@@ -4,6 +4,7 @@ import com.github.cnproxy.dto.ExpiredRankingDTO;
 import com.github.cnproxy.entity.InvitationCode;
 import com.github.cnproxy.entity.User;
 import com.github.cnproxy.pto.InvitationCodePTO;
+import com.github.cnproxy.pto.UpdatePasswordPTO;
 import com.github.cnproxy.secruity.JwtUser;
 import com.github.cnproxy.service.InvitationCodeService;
 import com.github.cnproxy.service.ProxyService;
@@ -41,13 +42,13 @@ public class ApiController {
         return new ResponseEntity<>(proxyService.getExpiredRanking(),HttpStatus.OK);
     }
 
-    @PostMapping("/invitationcodes")
+    @PostMapping("/invitationcode")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<InvitationCode> assignInvitationCode(@RequestBody InvitationCodePTO pto) {
         return new ResponseEntity<>(invitationCodeService.assignInvitationCode(pto.getUserId()),HttpStatus.OK);
     }
 
-    @GetMapping("/invitationcodes")
+    @GetMapping("/invitationcode")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<InvitationCode>> allInvitationCode() {
         return new ResponseEntity<>(invitationCodeService.findAllInvitationCode(),HttpStatus.OK);
@@ -70,12 +71,21 @@ public class ApiController {
         return new ResponseEntity<>(result,HttpStatus.OK);
     }
 
-    @GetMapping("/user/invitationcodes")
+    @GetMapping("/user/invitationcode")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<InvitationCode>> assignInvitationCode() {
         JwtUser user = (JwtUser) getContext().getAuthentication().getPrincipal();
         log.debug("{}", user);
         return new ResponseEntity<>(invitationCodeService.myInvitationCode(user.getId()),HttpStatus.OK);
+    }
+
+    @PutMapping("/user/password")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity updatePassword(@RequestBody UpdatePasswordPTO pto) {
+        JwtUser user = (JwtUser) getContext().getAuthentication().getPrincipal();
+        pto.setUsername(user.getUsername());
+        userService.updatePassword(pto);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
 }

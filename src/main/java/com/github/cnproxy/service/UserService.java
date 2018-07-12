@@ -1,6 +1,7 @@
 package com.github.cnproxy.service;
 
 import com.github.cnproxy.entity.User;
+import com.github.cnproxy.pto.UpdatePasswordPTO;
 import com.github.cnproxy.pto.UserPTO;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,5 +33,11 @@ public interface UserService {
     @Transactional(propagation = Propagation.REQUIRED)
     void register(final UserPTO user);
 
+    /**
+     * 用户修改密码
+     * @param updatePasswordPTO
+     */
+    @Transactional(propagation = Propagation.REQUIRED)
+    void updatePassword(final UpdatePasswordPTO updatePasswordPTO);
 
 }

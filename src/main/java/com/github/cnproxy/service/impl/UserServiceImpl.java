@@ -3,6 +3,7 @@ package com.github.cnproxy.service.impl;
 import com.github.cnproxy.entity.InvitationCode;
 import com.github.cnproxy.entity.User;
 import com.github.cnproxy.mapper.UserMapper;
+import com.github.cnproxy.pto.UpdatePasswordPTO;
 import com.github.cnproxy.pto.UserPTO;
 import com.github.cnproxy.secruity.JwtTokenUtil;
 import com.github.cnproxy.secruity.JwtUser;
@@ -10,7 +11,6 @@ import com.github.cnproxy.secruity.JwtUserFactory;
 import com.github.cnproxy.service.InvitationCodeService;
 import com.github.cnproxy.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -91,6 +91,24 @@ public class UserServiceImpl implements UserService {
             userMapper.grantUserRole(saveUser.getId());
             invitationCodeService.useInvitationCode(invitationCode.getCode());
         }
+    }
 
+    @Override
+    public void updatePassword(UpdatePasswordPTO updatePasswordPTO) {
+        final String password = updatePasswordPTO.getOldPassword();
+        final String newPassword = updatePasswordPTO.getNewPassword();
+        final String reNewPassword = updatePasswordPTO.getReNewPassword();
+        if(!reNewPassword.equals(newPassword)) {
+            log.error("The newPassword not same as reNewPassword");
+            throw new RuntimeException("The newPassword not same as reNewPassword");
+        }
+        final String username = updatePasswordPTO.getUsername();
+        final User user = userMapper.getUser(username);
+        if(!encoder.matches(password, user.getPassword())) {
+            log.error("The oldPassword is error");
+            throw new RuntimeException("The oldPassword is error");
+        }
+        final String bcryptPassword = encoder.encode(newPassword);
+        userMapper.updatePassword(username,bcryptPassword);
     }
 }

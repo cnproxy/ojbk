@@ -2,6 +2,7 @@ package com.github.cnproxy.mapper;
 
 import com.github.cnproxy.entity.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface UserMapper {
@@ -16,5 +17,6 @@ public interface UserMapper {
 
     void grantUserRole(final Integer userId);
 
+    void updatePassword(@Param("username") final String username, @Param("password") final String password);
 
 }

@@ -73,4 +73,8 @@
         INSERT INTO user_role (user_id,role_id) VALUES (<![CDATA[#{userId}]]>,2)
     </insert>
 
+    <update id="updatePassword">
+        UPDATE users SET password = <![CDATA[#{password}]]> WHERE username = <![CDATA[#{username}]]>
+    </update>
+
 </mapper>
