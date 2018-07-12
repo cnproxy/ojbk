@@ -16,7 +16,7 @@
     </select>
 
     <select id="findAllInvitationCode" resultType="com.github.cnproxy.entity.InvitationCode">
-        SELECT * FROM invitation_codes ORDER BY userId ASC, used ASC
+        SELECT * FROM invitation_codes ORDER BY user_id ASC, used ASC
     </select>
 
     <update id="useInvitationCode">
