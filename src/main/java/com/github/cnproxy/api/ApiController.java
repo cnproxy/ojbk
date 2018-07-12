@@ -4,6 +4,7 @@ import com.github.cnproxy.dto.ExpiredRankingDTO;
 import com.github.cnproxy.entity.InvitationCode;
 import com.github.cnproxy.entity.User;
 import com.github.cnproxy.pto.InvitationCodePTO;
+import com.github.cnproxy.secruity.JwtUser;
 import com.github.cnproxy.service.InvitationCodeService;
 import com.github.cnproxy.service.ProxyService;
 import com.github.cnproxy.service.UserService;
@@ -46,6 +47,12 @@ public class ApiController {
         return new ResponseEntity<>(invitationCodeService.assignInvitationCode(pto.getUserId()),HttpStatus.OK);
     }
 
+    @GetMapping("/invitationcodes")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<List<InvitationCode>> allInvitationCode() {
+        return new ResponseEntity<>(invitationCodeService.findAllInvitationCode(),HttpStatus.OK);
+    }
+
     @GetMapping("/user")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<User> getUser() {
@@ -61,6 +68,14 @@ public class ApiController {
         Map<String,List<String>> result = new HashMap<>();
         result.put("identity",roles);
         return new ResponseEntity<>(result,HttpStatus.OK);
+    }
+
+    @GetMapping("/user/invitationcodes")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<List<InvitationCode>> assignInvitationCode() {
+        JwtUser user = (JwtUser) getContext().getAuthentication().getDetails();
+        log.debug("{}", user);
+        return new ResponseEntity<>(invitationCodeService.myInvitationCode(user.getId()),HttpStatus.OK);
     }
 
 }

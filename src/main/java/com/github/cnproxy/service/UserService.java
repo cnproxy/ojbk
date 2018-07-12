@@ -1,6 +1,7 @@
 package com.github.cnproxy.service;
 
 import com.github.cnproxy.entity.User;
+import com.github.cnproxy.pto.UserPTO;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,7 +30,7 @@ public interface UserService {
      * @param user
      */
     @Transactional(propagation = Propagation.REQUIRED)
-    void register(final User user);
+    void register(final UserPTO user);
 
 
 }

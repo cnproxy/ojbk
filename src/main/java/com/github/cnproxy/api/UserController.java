@@ -1,6 +1,7 @@
 package com.github.cnproxy.api;
 
 import com.github.cnproxy.entity.User;
+import com.github.cnproxy.pto.UserPTO;
 import com.github.cnproxy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody User user) {
+    public ResponseEntity register(@RequestBody UserPTO user) {
         userService.register(user);
         return ResponseEntity.ok().build();
     }

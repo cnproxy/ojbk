@@ -21,6 +21,9 @@ public class InvitationCode implements java.io.Serializable {
     @JsonIgnore
     private Integer toUser;
 
+    /** 是否被使用 */
+    private boolean used;
+
     public InvitationCode(final Integer toUser) {
         this.setCode(UUID.randomUUID().toString());
         this.toUser = toUser;

@@ -61,7 +61,7 @@ CREATE TABLE users (
   username varchar(20) NOT NULL,
   email varchar(20) NOT NULL,
   password varchar(100) NOT NULL,
-  enabled bit(1) NOT NULL DEFAULT b'1',
+  enabled bit(1) NOT NULL,
   creation_on timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   modified_on timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   invite_by bigint(11) DEFAULT NULL,
@@ -74,5 +74,6 @@ CREATE TABLE invitation_codes (
   id bigint(11) NOT NULL AUTO_INCREMENT,
   code varchar(64) DEFAULT NULL,
   user_id bigint(11) NOT NULL,
+  used bit(1) NOT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 STATS_PERSISTENT=0 COMMENT='Invitation Code Info';

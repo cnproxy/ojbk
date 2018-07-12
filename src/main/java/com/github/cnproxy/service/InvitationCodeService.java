@@ -4,6 +4,8 @@ import com.github.cnproxy.entity.InvitationCode;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Transactional
 public interface InvitationCodeService {
 
@@ -13,4 +15,16 @@ public interface InvitationCodeService {
      */
     @Transactional(propagation = Propagation.REQUIRED)
     InvitationCode assignInvitationCode(final Integer userId);
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    List<InvitationCode> myInvitationCode(final Integer userId);
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    InvitationCode findInvitationCode(final String code);
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    void useInvitationCode(final String code);
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    List<InvitationCode> findAllInvitationCode();
 }

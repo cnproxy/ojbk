@@ -1,17 +1,22 @@
 package com.github.cnproxy.service.impl;
 
+import com.github.cnproxy.entity.InvitationCode;
 import com.github.cnproxy.entity.User;
 import com.github.cnproxy.mapper.UserMapper;
+import com.github.cnproxy.pto.UserPTO;
 import com.github.cnproxy.secruity.JwtTokenUtil;
 import com.github.cnproxy.secruity.JwtUser;
 import com.github.cnproxy.secruity.JwtUserFactory;
+import com.github.cnproxy.service.InvitationCodeService;
 import com.github.cnproxy.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -26,6 +31,8 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
+    @Autowired
+    private InvitationCodeService invitationCodeService;
 
     private final static BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -72,11 +79,18 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void register(final User user) {
-        final String bcryptPassword = encoder.encode(user.getPassword());
-        log.info("User {} password is {}", user.getUsername(), bcryptPassword);
-        user.setPassword(bcryptPassword);
-        userMapper.saveUser(user);
-        userMapper.grantUserRole(user.getId());
+    public void register(final UserPTO user) {
+        InvitationCode invitationCode = invitationCodeService.findInvitationCode(user.getInvitationCode());
+        if(Objects.isNull(invitationCode) || invitationCode.isUsed()) {
+            log.error("Invitation code is invalidate");
+        } else {
+            final String bcryptPassword = encoder.encode(user.getPassword());
+            log.info("User {} password is {}", user.getUsername(), bcryptPassword);
+            User saveUser = new User().setUsername(user.getUsername()).setPassword(bcryptPassword).setInviteBy(invitationCode.getToUser());
+            userMapper.saveUser(saveUser);
+            userMapper.grantUserRole(saveUser.getId());
+            invitationCodeService.useInvitationCode(invitationCode.getCode());
+        }
+
     }
 }
