@@ -25,7 +25,7 @@ public class UserServiceTest {
     @Test
     @Rollback
     public void saveUser() throws Exception {
-        User user = new User().setUsername("10001").setPassword("pony").setCreationOn(new Date()).setCreationOn(new Date());
-        userService.register(user);
+//        User user = new User().setUsername("10001").setPassword("pony").setCreationOn(new Date()).setCreationOn(new Date());
+//        userService.register(user);
     }
 }
