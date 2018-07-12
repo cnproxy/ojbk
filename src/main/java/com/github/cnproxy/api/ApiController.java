@@ -73,9 +73,9 @@ public class ApiController {
     @GetMapping("/user/invitationcodes")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<InvitationCode>> assignInvitationCode() {
-//        JwtUser user = (JwtUser) getContext().getAuthentication().getDetails();
-        log.debug("{}", getContext().getAuthentication());
-        return new ResponseEntity<>(invitationCodeService.myInvitationCode(1),HttpStatus.OK);
+        JwtUser user = (JwtUser) getContext().getAuthentication().getPrincipal();
+        log.debug("{}", user);
+        return new ResponseEntity<>(invitationCodeService.myInvitationCode(user.getId()),HttpStatus.OK);
     }
 
 }
