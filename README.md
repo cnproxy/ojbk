@@ -6,7 +6,7 @@
   Return: 200  
 
 * 获取token  
-  POST https://sw.tomaer.com/api/token/access  
+  POST https://sw.tomaer.com/api/user/token  
   Body: `{"username":"" ,"password":""}`  
   Return: `{"token": ""}`  
 
