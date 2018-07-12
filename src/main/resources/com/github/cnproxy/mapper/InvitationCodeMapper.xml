@@ -8,15 +8,15 @@
     </insert>
 
     <select id="myInvitationCode" resultType="com.github.cnproxy.entity.InvitationCode">
-        SELECT * FROM invitation_codes WHERE user_id = <![CDATA[#{userId}]]> ORDER BY used ASC
+        SELECT id,code,user_id toUser,used FROM invitation_codes WHERE user_id = <![CDATA[#{userId}]]> ORDER BY used ASC
     </select>
 
     <select id="findInvitationCode" resultType="com.github.cnproxy.entity.InvitationCode">
-        SELECT * FROM invitation_codes WHERE code = <![CDATA[#{code}]]>
+        SELECT id,code,user_id toUser,used FROM invitation_codes WHERE code = <![CDATA[#{code}]]>
     </select>
 
     <select id="findAllInvitationCode" resultType="com.github.cnproxy.entity.InvitationCode">
-        SELECT * FROM invitation_codes ORDER BY user_id ASC, used ASC
+        SELECT id,code,user_id toUser,used FROM invitation_codes ORDER BY user_id ASC, used ASC
     </select>
 
     <update id="useInvitationCode">
