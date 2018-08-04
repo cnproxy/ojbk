@@ -44,3 +44,9 @@
   GET https://sw.tomaer.com/api/sec/invitationcode    
   Headers: Authorization {{token}} `token`为`AccessToken`返回的的结果  
   Return: `[{"id": 1 ,"code": "21b8522a-9832-4713-b5b6-8d9e740c8d8f" ,"toUser": 1 ,"used": false}]`  
+ 
+* 管理员修改用户密码  
+  PUT https://sw.tomaer.com/api/sec/password    
+  Headers: Authorization {{token}} `token`为`AccessToken`返回的的结果  
+  Body: `{"username": ""}`   
+  Return: `{"password": ""}`  
