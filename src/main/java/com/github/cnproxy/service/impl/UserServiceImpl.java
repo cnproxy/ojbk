@@ -11,6 +11,7 @@ import com.github.cnproxy.secruity.JwtUserFactory;
 import com.github.cnproxy.service.InvitationCodeService;
 import com.github.cnproxy.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -35,6 +36,8 @@ public class UserServiceImpl implements UserService {
     private InvitationCodeService invitationCodeService;
 
     private final static BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+    private static final String POSSIBLE_CHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
     @Override
     public String loginAndGenerateToken(final String username, final String password) {
@@ -111,4 +114,17 @@ public class UserServiceImpl implements UserService {
         final String bcryptPassword = encoder.encode(newPassword);
         userMapper.updatePassword(username,bcryptPassword);
     }
+
+    @Override
+    public String updatePasswordByAdmin(String username) {
+        final String password = RandomStringUtils.random(8, POSSIBLE_CHARS);
+        final User user = userMapper.findUserByUsername(username);
+        if(null != user) {
+            final String bcryptPassword = encoder.encode(password);
+            userMapper.updatePassword(username,bcryptPassword);
+        }
+        return password;
+    }
+
+
 }

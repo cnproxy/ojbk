@@ -40,4 +40,11 @@ public interface UserService {
     @Transactional(propagation = Propagation.REQUIRED)
     void updatePassword(final UpdatePasswordPTO updatePasswordPTO);
 
+    /**
+     * 管理员修改用户密码
+     * @param username
+     */
+    @Transactional(propagation = Propagation.REQUIRED)
+    String updatePasswordByAdmin(final String username);
+
 }

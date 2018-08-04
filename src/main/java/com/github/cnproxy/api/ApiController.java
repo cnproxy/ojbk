@@ -4,6 +4,7 @@ import com.github.cnproxy.dto.ExpiredRankingDTO;
 import com.github.cnproxy.entity.InvitationCode;
 import com.github.cnproxy.entity.User;
 import com.github.cnproxy.pto.InvitationCodePTO;
+import com.github.cnproxy.pto.UpdatePasswordByAdminPTO;
 import com.github.cnproxy.pto.UpdatePasswordPTO;
 import com.github.cnproxy.secruity.JwtUser;
 import com.github.cnproxy.service.InvitationCodeService;
@@ -52,6 +53,15 @@ public class ApiController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<InvitationCode>> allInvitationCode() {
         return new ResponseEntity<>(invitationCodeService.findAllInvitationCode(),HttpStatus.OK);
+    }
+
+    @PutMapping("/password")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Map<String,String>> updatePasswordByAdmin(@RequestBody UpdatePasswordByAdminPTO pto) {
+        Map<String,String> result = new HashMap<String,String>();
+        final String password = userService.updatePasswordByAdmin(pto.getUsername());
+        result.put("password",password);
+        return new ResponseEntity<Map<String,String>>(result,HttpStatus.OK);
     }
 
     @GetMapping("/user")
