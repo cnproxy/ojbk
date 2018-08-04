@@ -103,7 +103,7 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("The newPassword not same as reNewPassword");
         }
         final String username = updatePasswordPTO.getUsername();
-        final User user = userMapper.getUser(username);
+        final User user = userMapper.findUserByUsername(username);
         if(!encoder.matches(password, user.getPassword())) {
             log.error("The oldPassword is error");
             throw new RuntimeException("The oldPassword is error");
